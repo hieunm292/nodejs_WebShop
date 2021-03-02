@@ -7,6 +7,7 @@ class SiteController{
 
     //GET/search
     search(req, res){
+        console.log(res.query);
         res.render('search');
     }
 }
