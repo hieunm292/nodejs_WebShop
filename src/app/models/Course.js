@@ -6,12 +6,13 @@ const Course = new Schema(
         name: { type: String, maxLength : 255},
         description: { type: String , maxLength : 255 },
         image: { type: String, maxLength : 255 },
+        author: { type: String, maxLength : 255},
         // videoId: { type: String, required: true },
         // level: { type: String },
         // slug: { type: String, slug: 'name', unique: true },
         createAt:{type:Date,default:Date.now},
         updateAt:{type:Date,default:Date.now},
-    },
+    }
     // {
     //     timestamps: true,
     // },

@@ -7,10 +7,11 @@ class SiteController{
     index(req, res){ 
 
 
-        Course.find({}, function (err, shop_web) {
+        Course.find({}, function (err, courses) {
             // docs.forEach
-            if(!err) {res.json(shop_web);}
-            else{
+            if(!err) {
+                res.json(courses);
+            } else{
             res.status(400).json({error : 'ERROR !!!'});}
           });
 

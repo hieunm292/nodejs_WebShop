@@ -34,7 +34,7 @@
   "dependencies": {
     "express": "^4.17.1",
     "express-handlebars": "^5.2.1",
-    "mongoose": "^5.11.19"
+    "mongoose": "^5.11.15"
   },
   "devDependencies": {
     "husky": "^5.1.3",

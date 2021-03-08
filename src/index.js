@@ -2,14 +2,16 @@ const path = require('path');
 const express = require('express');
 const morgan = require('morgan');
 const handlebars = require('express-handlebars');
-const { TRUE } = require('node-sass');
-const app = express();
-const port = 3000;
 
 const route=require('./routes');
 // connect db
 const db=require('./config/db');
 db.connect();
+
+const { TRUE } = require('node-sass');
+const app = express();
+const port = 3000;
+
 
 app.use(express.static(path.join(__dirname,'public')));
 
