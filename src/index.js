@@ -12,7 +12,7 @@ const { TRUE } = require('node-sass');
 const app = express();
 const port = 3000;
 
-
+//use static folder
 app.use(express.static(path.join(__dirname,'public')));
 
 app.use(express.urlencoded(extended= true));
@@ -33,5 +33,5 @@ app.set('views',path.join(__dirname, 'resources', 'views'));
 route(app);
 
 app.listen(port, () => {
-    console.log(`Example app listening at http://localhost:${port}`);
+    console.log(`app listening at http://localhost:${port}`);
 });

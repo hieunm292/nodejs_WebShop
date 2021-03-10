@@ -1,0 +1,28 @@
+<div class="mt-4">
+    <h3>Thêm sản phẩm</h3>
+
+    <form method="POST" action="/courses/store">
+        <div class="form-group">
+            <label for="name">Tên sản phẩm</label>
+            <input type="text" class="form-control" id="name" name="name">
+        </div>
+        <div class="form-group">
+            <label for="description">Mô tả</label>
+            <input type="text" class="form-control" id="description" name="description">
+        </div>
+        {{!-- <div class="form-group">
+            <label for="videoId">Link ảnh</label>
+            <input type="text" class="form-control" id="videoId" name="image">
+        </div> --}}
+        <div class="form-group">
+            <label for="videoId">Video ID về sản phẩm</label>
+            <input type="text" class="form-control" id="videoId" name="videoId">
+        </div>
+        {{!-- <div class="form-group">
+            <label for="level">Trình độ học</label>
+            <input type="text" class="form-control" id="level" name="level">
+        </div> --}}
+        
+        <button type="submit" class="btn btn-primary">Thêm sản phẩm</button>
+    </form>
+</div>
