@@ -5,8 +5,6 @@ class SiteController{
 
     //GET/
     index(req, res,next){ 
-
-
         // Course.find({}, function (err, courses) {
         //     if(!err) {
         //         res.json(courses);

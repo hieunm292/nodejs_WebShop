@@ -24,13 +24,31 @@ class CourseController{
         course.save()
               .then(()=>res.redirect('/'))
               .catch((error)=>{
-                  
               })
+    }
 
-            // .save()
-            // .then(() => res.redirect('/me/stored/courses'))
-            // .catch((error) => {});
-        //res.json(req.body)
+    //GET/course:id/edit
+    // edit(req,res,next){
+    //     Course.findById(req.params.id)
+    //     .then(course=>res.render('courses/edit',{course :mongooseToObject(course)}))
+    //     .catch(next)
+    // }
+
+    edit(req, res, next) {
+        Course.findById(req.params.id)
+            .then((course) =>
+                res.render('courses/edit', {
+                    course: mongooseToObject(course),
+                }),
+            )
+            .catch(next);
+    }
+
+    //PUT/course:id
+    update(req, res, next) {
+        Course.updateOne({ _id: req.params.id }, req.body)
+            .then(() => res.redirect('/me/stored/courses'))
+            .catch(next);
     }
 }
 
