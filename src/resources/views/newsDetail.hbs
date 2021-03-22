@@ -1,0 +1,1 @@
+<h1>News Detail</h1>
