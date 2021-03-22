@@ -1,17 +1,6 @@
 <div class="mt-4">
     <div>
-      <h3>Sản phẩm của tôi</h3>
-      <a href="/me/trash/courses"</i>Sản phẩm đã xóa</a>
-
-
-    <div class="searchSearch">
-      <nav class="navbar navbar-light bg-light">
-        <form class="form-inline">
-          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-           <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-           <a href="/me/trash/courses" class="Sản phẩm đã xóa"></a>
-        </form>
-      </nav>
+      <h3>Sản phẩm đã xóa</h3>
     </div>
 
     <table class="table mt-4">
@@ -20,7 +9,7 @@
                 <th scope="col">STT</th>
                 <th scope="col">Tên sản phẩm</th>
                 <th scope="col">Mô tả</th>
-                <th scope="col" colspan="2">Thời gian tạo</th>
+                <th scope="col" colspan="2">Thời gian xóa</th>
             </tr>
         </thead>
         <tbody>
@@ -29,23 +18,22 @@
                 <th scope="row">{{sum @index 1}}</th>
                 <td>{{this.name}}</td>
                 <td>{{this.description}}</td>
-                <td>{{this.createdAt}}</td>
+                <td>{{this.deletedAt}}</td>
                 <td>
-                    <a href="/courses/{{this._id}}/edit" class="btn btn-link">Sửa</a>
-                    <a href="" class="btn btn-link" data-toggle="modal" data-id="{{this._id}}" data-target="#delete-course-modal">Xóa</a>
+                    <a href="" class="btn btn-link btn-restore" data-id="{{this._id}}">Khôi phục</a>
+                    <a href="" class="btn btn-link" data-toggle="modal" data-id="{{this._id}}" data-target="#delete-course-modal">Xóa forever</a>
                 </td>
             </tr>
             {{else}}
             <tr>
               <td colspan="5" class="text-center">
-                Bạn chưa mua sản phẩm nào.
-                <a href="/courses/create">Tạo sản phẩm</a>
+                Thùng rác trống.
+                <a href="/me/stored/courses">Danh sách sản phẩm</a>
               </td>
             </tr>
             {{/each}}
         </tbody>
     </table>
-    <a href="/me/trash/courses" class="Sản phẩm đã xóa"></a>
 </div>
 
 {{!-- Confirm delete course --}}
@@ -59,24 +47,26 @@
         </button>
       </div>
       <div class="modal-body">
-        <p>Wanna Xóa bro???</p>
+        <p>Still Wanna Xóa bro???</p>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
-        <button id="btn-delete-course" type="button" class="btn btn-danger">Xóa</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy bỏ</button>
+        <button id="btn-delete-course" type="button" class="btn btn-danger">Xóa forever</button>
       </div>
     </div>
   </div>
 </div>
 
-{{!-- Delete hidden form --}}
 <form name="delete-course-form" method="POST"></form>
+<form name="restore-course-form" method="POST"></form>
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         var courseId;
         var deleteForm = document.forms['delete-course-form'];
+        var restoreForm = document.forms['restore-course-form'];
         var btnDeleteCourse = document.getElementById('btn-delete-course');
+        var restoreBtn = $('.btn-restore');
         // When dialog confirm clicked
         $('#delete-course-modal').on('show.bs.modal', function (event) {
             var button = $(event.relatedTarget);
@@ -85,8 +75,16 @@
         
         // When delete course btn clicked
         btnDeleteCourse.onclick = function () {
-            deleteForm.action = '/courses/' + courseId + '?_method=DELETE';
+           deleteForm.action = '/courses/' + courseId + '/deleteForever?_method=DELETE';
             deleteForm.submit();
         }
+        // Restore btn clicked
+        restoreBtn.click(function (e) {
+          e.preventDefault();
+          
+          var courseId = $(this).data('id');
+          restoreForm.action = '/courses/' + courseId + '/restore?_method=PATCH';
+          restoreForm.submit();
+        });
     });
 </script>
