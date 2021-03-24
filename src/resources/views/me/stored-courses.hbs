@@ -6,8 +6,9 @@
         <a href="/courses/create">Tạo mới sản phẩm</a>
       
     </div>
-
-    <a href="/me/trash/courses"</i>Sản phẩm đã xóa</a>
+    {{#if deletedCount}}
+    <a href="/me/trash/courses"</i>Sản phẩm đã xóa ({{deletedCount}})</a>
+    {{/if}}
 
 
     <div class="searchSearch">
