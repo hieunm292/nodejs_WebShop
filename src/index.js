@@ -25,17 +25,9 @@ app.use(methodOverride('_method'));
 //app.use(morgan('combined'));
 
 //template engine
-// app.engine('hbs', handlebars(
-//   {extname:'.hbs',
-//    helpers: {
-//     sum: (a, b) => a + b,
-//   },
-// }
-// ));
 
 app.engine(
-  'hbs',
-  handlebars({
+  'hbs', handlebars({
       extname: '.hbs',
       helpers: {
           sum: (a, b) => a + b,
