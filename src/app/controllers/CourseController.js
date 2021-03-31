@@ -65,11 +65,25 @@ class CourseController{
         .catch(next);
     }
 
-    //PAC/course:id/restore
+    //PATCH/course:id/restore
     restore(req, res, next) {
         Course.restore({ _id: req.params.id })
             .then(() => res.redirect('back'))
             .catch(next);
+    }
+
+    //POST//courses/handle-form-actions
+    handleFormActions(res,req,next){
+        switch(res.body.action){
+            case 'deleteCheckbox':
+                Course.delete({_id: {$in:res.body.courseIds}})
+                 .then(() => req.redirect('back'))
+                 .catch(next);
+                break;
+            default:
+                req.json({message:'Action is not valid !'});
+
+        }
     }
 }
 

@@ -1,41 +1,25 @@
-<form class="mt-4">
-    <div class="sub_menu">
+<form name="container-form" class="mt-4" method="POST" action="/courses/handle-form-actions">
+    <div>
+      <h3>Sản phẩm của tôi</h3>
+      {{#if deletedCount}}
+      <a href="/me/trash/courses">Thùng rác ({{deletedCount}})</a>
+      {{/if}}
+      <div class="table mt-4 d-flex align-items-center">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="" id="checkbox-all">
+          <label class="form-check-label" for="checkbox-all">
+            Select All
+          </label>
+        </div> 
 
-        <h3>Sản phẩm của tôi</h3>
-        
-        <a href="/courses/create">Tạo mới sản phẩm</a>
-      
-    </div>
-    {{#if deletedCount}}
-    <a href="/me/trash/courses"</i>Sản phẩm đã xóa ({{deletedCount}})</a>
-    {{/if}}
+        <select class="form-control form-control-sm checkbox-select-all-options" id="" name="action" required>
+           <option value="">-- Select one --</option>
+           <option value="deleteCheckbox">Xóa</option>
+           <option value="cancel">Hủy</option>
+        </select>
 
-
-    <div class="table mt-4 d-flex align-items-center">
-      <div class="form-check">
-        <input class="form-check-input" type="checkbox" value="" id="checkbox-all">
-        <label class="form-check-label" for="checkbox-all">
-           Select All
-        </label>
+        <button class="btn btn-primary btn-sm check-all-submit-btn disabled">Thực hiện</button>
       </div>
-
-      <select class="form-control form-control-sm checkbox-select-all-options" id="">
-        <option>-- Select one --</option>
-        <option class="deleteCheckbox">Xóa</option>
-        <option class="">Hủy</option>
-      </select>
-      <button class="btn btn-primary btn-sm check-all-submit-btn disabled">Thực hiện</button>
-    </div>
-
-
-    <div class="searchSearch">
-      <nav class="navbar navbar-light bg-light">
-        <form class="form-inline">
-          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-           <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-           <a href="/me/trash/courses" class="Sản phẩm đã xóa"></a>
-        </form>
-      </nav>
     </div>
 
     <table class="table mt-4">
@@ -68,31 +52,31 @@
             {{else}}
             <tr>
               <td colspan="5" class="text-center">
-                Bạn chưa mua sản phẩm nào.
-                <a href="/courses/create">Tạo sản phẩm</a>
+                Bạn chưa đăng khóa học nào.
+                <a href="/courses/create">Đăng khóa học</a>
               </td>
             </tr>
             {{/each}}
         </tbody>
     </table>
-</form> 
+</form>
 
 {{!-- Confirm delete course --}}
 <div id="delete-course-modal" class="modal" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Warning Warning</h5>
+        <h5 class="modal-title">Xóa khóa học?</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <p>Wanna Xóa bro???</p>
+        <p>Bạn chắc chắn muốn xóa khóa học này?</p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
-        <button id="btn-delete-course" type="button" class="btn btn-danger">Xóa</button>
+        <button id="btn-delete-course" type="button" class="btn btn-danger">Xóa bỏ</button>
       </div>
     </div>
   </div>
@@ -105,12 +89,11 @@
     document.addEventListener('DOMContentLoaded', function() {
         var courseId;
         var deleteForm = document.forms['delete-course-form'];
+        var containerForm=document.forms['container-form'];
         var btnDeleteCourse = document.getElementById('btn-delete-course');
         var checkboxAll=$('#checkbox-all');
         var courseItemCheckbox=$('input[name="courseIds[]"]');
         var checkAllSubmitBtn=$('.check-all-submit-btn');
-
- 
 
 
         // When dialog confirm clicked
@@ -124,6 +107,7 @@
             deleteForm.action = '/courses/' + courseId + '?_method=DELETE';
             deleteForm.submit();
         }
+
 
         //checkbox all click
         checkboxAll.change(function(){
@@ -139,16 +123,25 @@
           renderCheckAllSubmitBtn();
         });
 
+        //checkbox btn submit disabled to able
+        
+
+        checkAllSubmitBtn.on('submit',function(e){
+          var isSubmitable=!$(this).hasClass('disabled');
+          if(!isSubmitable){
+            e.preventDefault();
+          }
+        })
+
 
         //submit button when click check box
-        fucntion renderCheckAllSubmitBtn(){
-          var checkedLength=$('input[name="courseIds[]"]:checked').length;
-          if(checkedLength >0){
+        function renderCheckAllSubmitBtn(){
+          var checkedCount=$('input[name="courseIds[]"]:checked').length;
+          if(checkedCount>0){
             checkAllSubmitBtn.removeClass('disabled');
           }else{
             checkAllSubmitBtn.addClass('disabled');
           }
-        };
-
+        }
     });
 </script>
