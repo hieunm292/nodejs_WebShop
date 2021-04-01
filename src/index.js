@@ -5,7 +5,7 @@ const morgan = require('morgan');
 const handlebars = require('express-handlebars');
 
 const route=require('./routes');
-// connect db
+// connect to db
 const db=require('./config/db');
 db.connect();
 
@@ -22,7 +22,7 @@ app.use(express.json());
 app.use(methodOverride('_method'));
 
 //http logger
-//app.use(morgan('combined'));
+app.use(morgan('combined'));
 
 //template engine
 
@@ -36,8 +36,7 @@ app.engine(
 );
 
 app.set('view engine', 'hbs');
-//app.set('views',path.join(__dirname,'resources/views')); 
-app.set('views',path.join(__dirname, 'resources', 'views')); 
+app.set('views',path.join(__dirname, 'resources','views')); 
 
 //route init
 route(app);
