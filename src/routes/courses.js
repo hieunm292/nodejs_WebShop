@@ -10,7 +10,7 @@ router.post('/handle-form-actions',courseController.handleFormActions);
 router.put('/:id', courseController.update);
 router.patch('/:id/restore', courseController.restore);
 router.delete('/:id/deleteForever', courseController.deleteForever);
-router.delete('/:id', courseController.delete);
+router.delete('/:id', courseController.softDelete);
 router.get('/:slug', courseController.show);
 
 

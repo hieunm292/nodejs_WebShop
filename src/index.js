@@ -4,6 +4,8 @@ const methodOverride = require('method-override');
 const morgan = require('morgan');
 const handlebars = require('express-handlebars');
 
+const sortMiddleware=require('./app/middlewares/SortMiddleware');
+
 const route=require('./routes');
 // connect to db
 const db=require('./config/db');
@@ -21,6 +23,20 @@ app.use(express.json());
 
 app.use(methodOverride('_method'));
 
+
+//sortMiddleware
+app.use(sortMiddleware);
+
+// app.use(guardXX);
+
+// function guardXX(req,res,next){
+//     if(['123','anhyeuem'].includes(req.query.pass)){
+//         req.face="ABC";
+//         return next();
+
+//     }res.status(404).json({message:"Access Denied"});
+// }
+
 //http logger
 app.use(morgan('combined'));
 
@@ -31,6 +47,23 @@ app.engine(
       extname: '.hbs',
       helpers: {
           sum: (a, b) => a + b,
+          sortable: (field, sort) =>{
+          const icons={
+              default:'oi oi-elevator',
+              asc:'oi oi-sort-ascending',
+              desc:'oi oi-sort-descending',
+          };
+
+          const types={
+              default:'desc',
+              desc:'asc',
+              asc:'desc',
+          };
+
+          const icon =icons[sort.type];
+          const type =types[sort.type];
+          return `<a href="?_sort&column=${sort.column}&type=${type}"><span class="${icon}"></span></a>`;
+        }
       },
   }),
 );

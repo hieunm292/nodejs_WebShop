@@ -52,7 +52,7 @@ class CourseController{
     }
 
     //DELETE/course:id
-    delete(req, res, next) {
+    softDelete(req, res, next) {
         Course.delete({_id: req.params.id})
         .then(() => res.redirect('back'))
         .catch(next);
