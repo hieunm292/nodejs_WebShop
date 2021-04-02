@@ -31,13 +31,10 @@
                 <th scope="col">
                   Tên sản phẩm
                   {{!-- <a href="?_sort&column=name&type=desc" class=""><span class="oi oi-elevator"></span></a> --}}
-                  {{{sortable 'name' _sort}}}
+                {{{sortable 'name' _sort}}}
                 </th>
-                <th scope="col">Mô tả
-                  {{{sortable 'description' _sort}}}</th>
-                <th scope="col" colspan="2">Thời gian tạo
-                  {{{sortable 'createdAt' _sort}}}
-                </th>
+                <th scope="col">Mô tả  {{{sortable 'description' _sort}}}</th>
+                <th scope="col" colspan="2">Thời gian tạo  {{{sortable 'createdAt' _sort}}}</th>
             </tr>
         </thead>
         <tbody>

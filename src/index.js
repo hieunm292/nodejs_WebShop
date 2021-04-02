@@ -4,7 +4,7 @@ const methodOverride = require('method-override');
 const morgan = require('morgan');
 const handlebars = require('express-handlebars');
 
-const sortMiddleware=require('./app/middlewares/SortMiddleware');
+const sortMiddleware = require('./app/middlewares/SortMiddleware');
 
 const route=require('./routes');
 // connect to db
@@ -47,11 +47,13 @@ app.engine(
       extname: '.hbs',
       helpers: {
           sum: (a, b) => a + b,
-          sortable: (field, sort) =>{
+
+        sortable:(field,sort)=>{
+            const sortType=field===sort.column ? sort.type : 'default';
           const icons={
               default:'oi oi-elevator',
-              asc:'oi oi-sort-ascending',
               desc:'oi oi-sort-descending',
+              asc:'oi oi-sort-ascending',
           };
 
           const types={
@@ -60,9 +62,10 @@ app.engine(
               asc:'desc',
           };
 
-          const icon =icons[sort.type];
-          const type =types[sort.type];
-          return `<a href="?_sort&column=${sort.column}&type=${type}"><span class="${icon}"></span></a>`;
+          const icon =icons[sortType];
+          const type =types[sortType];
+
+            return `<a href="?_sort&column=${field}&type=${type}" class=""><span class="${icon}"></span></a>`;
         }
       },
   }),
