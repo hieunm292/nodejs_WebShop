@@ -20,14 +20,25 @@ class CourseController{
     // [POST] /courses/store
     store(req, res, next) {
         req.body.image = `https://img.youtube.com/vi/${req.body.videoId}/sddefault.jpg`;
-        const course = new Course(req.body);
-        course.save()
-              .then(()=>res.redirect('/'))
-              .catch((error)=>{
-              })
+            const course = new Course(req.body);
+               course.save()
+                     .then(()=>res.redirect('/'))
+                     .catch(next)
     }
 
+        // Course.findOne({})
+        //    .sort({_id:'desc'})
+        //    .then(lastestCourse =>{
+        //     req.body._id=lastestCourse._id +1;
+        //     const course = new Course(req.body);
+        //        course.save()
+        //        .then(()=>res.redirect('/'))
+        //        .catch((next))
+        //    });
+    
+
     //GET/course:id/edit
+
     // edit(req,res,next){
     //     Course.findById(req.params.id)
     //     .then(course=>res.render('courses/edit',{course :mongooseToObject(course)}))

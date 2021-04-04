@@ -38,6 +38,7 @@
     "method-override": "^3.0.0",
     "mongoose": "^5.11.15",
     "mongoose-delete": "^0.5.3",
+    "mongoose-sequence": "^5.3.1",
     "mongoose-slug-generator": "^1.0.4"
   },
   "devDependencies": {
