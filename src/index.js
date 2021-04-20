@@ -3,6 +3,7 @@ const express = require('express');
 const methodOverride = require('method-override');
 const morgan = require('morgan');
 const handlebars = require('express-handlebars');
+const cookieParser = require('cookie-parser')
 
 const sortMiddleware = require('./app/middlewares/sortMiddleware');
 
@@ -20,7 +21,10 @@ app.use(express.static(path.join(__dirname,'public')));
 
 app.use(express.urlencoded(extended= true));
 app.use(express.json());
+app.use(cookieParser())
 
+
+//for PUT and DELETE methods
 app.use(methodOverride('_method'));
 
 

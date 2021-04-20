@@ -1,5 +1,5 @@
 <form name="container-form" class="mt-4" method="POST" action="/courses/handle-form-actions">
-    <div>
+    <div class="father">
       <h3>Sản phẩm của tôi</h3>
       {{#if deletedCount}}
       <a href="/me/trash/courses">Thùng rác ({{deletedCount}})</a>
@@ -12,6 +12,8 @@
           </label>
         </div> 
 
+        
+
         <select class="form-control form-control-sm checkbox-select-all-options" id="" name="action" required>
            <option value="">-- Select one --</option>
            <option value="deleteCheckbox">Xóa</option>
@@ -19,6 +21,8 @@
         </select>
 
         <button class="btn btn-primary btn-sm check-all-submit-btn "disabled>Thực hiện</button>
+
+        <a href="/courses/create" class="btn btn-createProduct">Tạo sản phẩm</a>
       </div>
     </div>
 

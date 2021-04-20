@@ -30,3 +30,20 @@ h2{
 .table td, .table th {
     padding: .95rem 0.5rem;
 }
+
+a:hover {
+    color: #0056b3;
+    text-decoration: none;
+}
+
+.father{
+    position: relative;
+}
+
+
+.btn-createProduct {
+    display: inline-block;
+    margin-left: 41rem;
+    border : 2px solid;
+    border-radius: 10px;
+}
