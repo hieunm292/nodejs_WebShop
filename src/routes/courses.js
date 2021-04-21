@@ -5,7 +5,7 @@ const courseController=require('../app/controllers/CourseController');
 const validate=require('../app/validate/createProductValidate');
 
 router.get('/create', courseController.create);
-router.post('/store', validate.postCreate , courseController.store);
+router.post('/store',validate.postCreate , courseController.store);
 router.get('/:id/edit', courseController.edit);
 router.post('/handle-form-actions',courseController.handleFormActions);
 router.put('/:id', courseController.update);
